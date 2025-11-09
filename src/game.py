@@ -2,6 +2,7 @@
 import random
 import time
 import tkinter as tk
+from dataclasses import dataclass
 
 WINDOW_W, WINDOW_H = 600, 700
 PLAYER_SIZE = 32
@@ -9,6 +10,10 @@ ENEMY_W, ENEMY_H = 40, 20
 SPAWN_EVERY_MS = 900
 TICK_MS = 16  # ~60 FPS
 
+@dataclass
+class Vector:
+    x: float
+    y: float
 class CampusDash:
     def __init__(self, root: tk.Tk):
         self.root = root
