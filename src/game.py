@@ -33,6 +33,7 @@ class CampusDash:
         self.score = 0
         self.best_score = 0  
         self.hud = self.canvas.create_text(10, 10, anchor="nw", text="", font=("Helvetica", 14))
+        self.canvas.tag_raise(self.hud)
 
         self.enemies = []                  # list of (canvas_id, vy)
         self.elapsed_since_spawn = 0.0
