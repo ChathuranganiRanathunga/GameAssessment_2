@@ -32,7 +32,7 @@ class CampusDash:
         # HUD + game state
         self.score = 0
         self.best_score = 0  
-        self.hud = self.canvas.create_text(10, 10, anchor="nw", text="", font=("Helvetica", 14))
+        self.hud = self.canvas.create_text(10, 10, anchor="nw", text="", font=("Helvetica", 14), fill="blue")
         self.canvas.tag_raise(self.hud)
 
         self.enemies = []                  # list of (canvas_id, vy)
@@ -67,7 +67,7 @@ class CampusDash:
     def _spawn_enemy(self):
         x = random.randint(ENEMY_W // 2, WINDOW_W - ENEMY_W // 2)
         vy = random.uniform(2.0, 4.0)
-        eid = self.canvas.create_rectangle(x - ENEMY_W/2, -ENEMY_H, x + ENEMY_W/2, 0, fill="red", outline="")
+        eid = self.canvas.create_rectangle(x - ENEMY_W/2, -ENEMY_H, x + ENEMY_W/2, 0, fill="red", outline="darkred")
         self.enemies.append((eid, vy))
 
     def start(self):
@@ -90,7 +90,7 @@ class CampusDash:
         self.canvas.create_text(
             WINDOW_W/2, WINDOW_H/2,
             text=f"Game Over\nScore: {self.score}\nBest: {self.best_score}\nPress any key to exit",
-            font=("Helvetica", 24, "bold"),
+            font=("Helvetica", 24, "bold"), fill="black",
             justify="center"
         )
         self.root.bind("<Key>", lambda e: self.root.destroy())
@@ -133,7 +133,7 @@ class CampusDash:
             if not (px1 < ex0 or px0 > ex1 or py1 < ey0 or py0 > ey1):
                 self.game_over()
                 return
-
+        self.canvas.tag_raise(self.hud)
         # next frame
         self.root.after(TICK_MS, self._tick)
 
